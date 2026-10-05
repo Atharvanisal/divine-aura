@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    color-scheme: light;
+  }
+  body {
+    background-color: #FAF6F0;
+    color: #231C18;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4, .font-serif {
+    font-family: 'Playfair Display', Georgia, serif;
+    letter-spacing: -0.01em;
+  }
+}
+
+@layer utilities {
+  .bg-warm-champagne {
+    background: #FAF6F0;
+  }
+  .bg-warm-card {
+    background: #FFFFFF;
+    border: 1px solid rgba(226, 214, 198, 0.4);
+  }
+  .gold-gradient {
+    background: linear-gradient(135deg, #B08836 0%, #C49C48 50%, #947029 100%);
+  }
+  .gold-gradient-hover {
+    background: linear-gradient(135deg, #947029 0%, #B08836 50%, #75561E 100%);
+  }
+  .gold-border {
+    border-color: rgba(184, 134, 11, 0.25);
+  }
+  .gold-text-gradient {
+    background: linear-gradient(135deg, #8C6527 0%, #C49C48 50%, #75561E 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero-mask {
+    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FAF6F0;
+}
+::-webkit-scrollbar-thumb {
+  background: #DACAB2;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #B08836;
+}
