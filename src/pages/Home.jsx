@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Sparkles, GraduationCap, Heart } from 'lucide-react';
-import SectionHeading from '../components/SectionHeading';
 import HeroSection from '../components/HeroSection';
 import SectionContainer from '../components/SectionContainer';
 import VideoShowcase from '../components/sections/VideoShowcase';
 import Testimonials from '../components/sections/Testimonials';
+import ProductsShowcase from '../components/sections/ProductsShowcase';
 import CTASection from '../components/CTASection';
 import Button from '../components/Button';
 import { BRAND, HIGHLIGHTS } from '../data/siteData';
@@ -31,6 +31,20 @@ const SIGNATURE_SERVICES = [
     description: 'Nourishing facials, gentle clean-up, and attentive skin therapies.',
     image: '/assets/service_skin_editorial.jpg',
     alt: 'Skin and personal care at Divine Aura'
+  },
+  {
+    id: 'waxing',
+    title: 'Body Waxing',
+    description: 'Hygienic and gentle waxing care delivered in a private, comfortable setting.',
+    image: '/assets/service_waxing_editorial.jpg',
+    alt: 'Body waxing at Divine Aura'
+  },
+  {
+    id: 'detan',
+    title: 'De-Tan & Clean-Up',
+    description: 'Gentle exfoliation and clarifying therapies designed for a clean, radiant complexion.',
+    image: '/assets/service_detan_editorial.jpg',
+    alt: 'De-Tan and clean-up at Divine Aura'
   }
 ];
 
@@ -69,7 +83,7 @@ export default function Home() {
               </div>
               <div>
                 <p className="text-xs font-semibold text-espresso">Personal Care</p>
-                <p className="text-[11px] text-warmBrown-500">Tailored to your glow</p>
+                <p className="text-xs text-warmBrown-500">Tailored to your glow</p>
               </div>
             </div>
           </div>
@@ -86,7 +100,7 @@ export default function Home() {
         </h1>
 
         <p className="text-base sm:text-lg text-warmBrown-600 leading-relaxed font-light max-w-xl">
-          At {BRAND.name}, we bring together expert care, modern techniques and a serene experience — for your beauty, wellness and self-growth.
+          A refined beauty experience designed around you. From expert styling to thoughtful skin and beauty care, Divine Aura blends modern techniques with a calm, elegant touch to help you look and feel your best.
         </p>
 
         <div className="pt-2 flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4 w-full sm:w-auto">
@@ -131,7 +145,7 @@ export default function Home() {
                 <h3 className="font-serif text-base sm:text-lg text-espresso font-medium">
                   {item.title}
                 </h3>
-                <p className="mt-1 text-xs sm:text-sm text-warmBrown-500 font-light leading-relaxed">
+                <p className="mt-1 text-sm sm:text-[15px] text-warmBrown-500 font-light leading-relaxed">
                   {item.description}
                 </p>
               </div>
@@ -151,16 +165,18 @@ export default function Home() {
             <h2 className="font-serif text-3xl sm:text-4xl text-espresso font-normal">
               Our Signature Services
             </h2>
-            <p className="mt-3 text-sm sm:text-base text-warmBrown-600 font-light leading-relaxed">
+            <p className="mt-3 text-[15px] sm:text-base lg:text-lg text-warmBrown-600 font-light leading-relaxed">
               Thoughtfully designed beauty services, tailored to your personal style and care.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 lg:gap-8 items-stretch">
-            {SIGNATURE_SERVICES.map((service) => (
+          <div className="grid grid-cols-1 md:grid-cols-6 gap-6 sm:gap-8 lg:gap-8 items-stretch">
+            {SIGNATURE_SERVICES.map((service, index) => (
               <div
                 key={service.id}
-                className="bg-white rounded-3xl p-4 sm:p-5 border border-[#EAE0D5] shadow-card flex flex-col justify-between"
+                className={`bg-white rounded-3xl p-4 sm:p-5 border border-[#EAE0D5] shadow-card flex flex-col justify-between col-span-1 md:col-span-2 ${
+                  index === 3 ? 'md:col-start-2' : ''
+                }`}
               >
                 <div>
                   <div className="rounded-2xl overflow-hidden aspect-[4/3] bg-[#F3ECE1] mb-5">
@@ -174,7 +190,7 @@ export default function Home() {
                   <h3 className="font-serif text-xl sm:text-2xl text-espresso font-normal">
                     {service.title}
                   </h3>
-                  <p className="mt-2 text-xs sm:text-sm text-warmBrown-600 font-light leading-relaxed">
+                  <p className="mt-2 text-sm sm:text-[15px] text-warmBrown-600 font-light leading-relaxed">
                     {service.description}
                   </p>
                 </div>
@@ -250,7 +266,10 @@ export default function Home() {
       {/* 6. TESTIMONIALS */}
       <Testimonials />
 
-      {/* 7. FINAL CTA */}
+      {/* 7. CURATED BEAUTY PRODUCTS SHOWCASE */}
+      <ProductsShowcase />
+
+      {/* 8. FINAL CTA */}
       <CTASection
         title="Your Beauty Journey Starts Here"
         subtitle="Book your appointment today and let our certified team provide you with gentle care and relaxation."

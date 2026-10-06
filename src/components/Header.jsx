@@ -57,7 +57,7 @@ export default function Header() {
                 key={link.name}
                 to={link.path}
                 className={({ isActive }) =>
-                  `px-3.5 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ${
+                  `px-3.5 py-1.5 rounded-full text-[15px] font-medium transition-all duration-200 ${
                     isActive
                       ? 'text-[#9E7A38] bg-[#F4ECDC] font-semibold'
                       : 'text-warmBrown-700 hover:text-[#9E7A38] hover:bg-[#F7F1E6]'
@@ -73,7 +73,7 @@ export default function Header() {
           <div className="hidden md:flex items-center gap-3">
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs lg:text-sm font-medium bg-[#9E7A38] hover:bg-[#856529] text-white shadow-sm hover:shadow transition-all duration-300 active:scale-95"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium bg-[#9E7A38] hover:bg-[#856529] text-white shadow-sm hover:shadow transition-all duration-300 active:scale-95"
             >
               <Calendar className="w-3.5 h-3.5" />
               <span>Book Appointment</span>

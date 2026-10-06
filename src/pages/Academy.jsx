@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Sparkles, GraduationCap, CheckCircle2, ArrowRight, BookOpen, Users, Compass, Award, ZoomIn, X } from 'lucide-react';
+import { GraduationCap, CheckCircle2, ArrowRight, Award, ZoomIn, X } from 'lucide-react';
 import SectionHeading from '../components/SectionHeading';
 import HeroSection from '../components/HeroSection';
 import SectionContainer from '../components/SectionContainer';
 import Button from '../components/Button';
-import { BRAND, ACADEMY_COURSE, ACADEMY_BENEFITS, ACADEMY_MOMENTS, ACADEMY_CERTIFICATIONS } from '../data/siteData';
+import { BRAND, ACADEMY_COURSE, ACADEMY_BENEFITS, ACADEMY_CERTIFICATIONS } from '../data/siteData';
 
 export default function Academy() {
   const [activeCert, setActiveCert] = useState(null);
@@ -133,7 +132,7 @@ export default function Academy() {
                   <span className="w-8 h-8 rounded-full bg-[#FAF3E8] border border-[#E5D7BE] text-[#9E7A38] text-xs font-semibold flex items-center justify-center shrink-0 group-hover:bg-[#9E7A38] group-hover:text-white transition-colors">
                     {String(index + 1).padStart(2, '0')}
                   </span>
-                  <span className="text-sm font-medium text-espresso leading-snug">
+                  <span className="text-[15px] font-medium text-espresso leading-relaxed">
                     {point}
                   </span>
                 </div>
@@ -170,7 +169,7 @@ export default function Academy() {
                     <div className="w-6 h-6 rounded-full bg-[#FAF3E8] border border-[#E5D7BE] flex items-center justify-center shrink-0 text-[#9E7A38]">
                       <CheckCircle2 className="w-4 h-4" />
                     </div>
-                    <span className="text-sm sm:text-base text-espresso font-medium">
+                    <span className="text-[15px] sm:text-base text-espresso font-medium">
                       {benefit}
                     </span>
                   </div>
@@ -234,30 +233,69 @@ export default function Academy() {
       </section>
 
       {/* 4. READY TO START YOUR JOURNEY BANNER */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-white border-t border-[#EAE0D5]">
+      <section className="py-12 sm:py-16 lg:py-20 bg-[#FAF6F0] relative overflow-hidden">
         <SectionContainer>
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="font-serif text-3xl sm:text-4xl text-espresso font-normal">
-              Ready to Start Your Journey?
-            </h2>
-            <p className="mt-3 text-base text-warmBrown-600 font-light">
-              Enquire now and take the first step towards building hands-on skill and confidence in beauty and wellness.
-            </p>
-            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button
-                to={`/contact?service=Academy%3A+${encodeURIComponent(ACADEMY_COURSE.title)}`}
-                size="lg"
-              >
-                <span>Enquire Now</span>
-                <ArrowRight className="w-4 h-4 ml-1" />
-              </Button>
-              <Button
-                to="/contact"
-                variant="secondary"
-                size="lg"
-              >
-                <span>Visit Campus & Studio</span>
-              </Button>
+          <div className="relative rounded-3xl sm:rounded-[2.5rem] overflow-hidden shadow-2xl border border-[#EAE0D5] text-center p-8 sm:p-14 lg:p-20 bg-[#1E1712]">
+            {/* Full-Cover Editorial Academy Background Image */}
+            <div
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-1000 ease-out hover:scale-105"
+              style={{ backgroundImage: "url('/assets/cta_academy_bg.jpg')" }}
+              role="img"
+              aria-label="Divine Aura beauty academy training studio"
+            />
+
+            {/* Elegant Educational Luxury Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-[#1E1712]/55 via-[#1E1712]/45 to-[#1E1712]/65 pointer-events-none" />
+            <div className="absolute inset-0 bg-[#241B14]/25 backdrop-blur-[1.5px] pointer-events-none" />
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background: 'radial-gradient(ellipse at center, rgba(30, 23, 18, 0.45) 0%, rgba(30, 23, 18, 0.25) 55%, rgba(30, 23, 18, 0.65) 100%)'
+              }}
+            />
+
+            {/* Subtle Ambient Golden Glow Accents */}
+            <div className="absolute top-0 right-0 -mr-16 -mt-16 w-80 h-80 rounded-full bg-[#E5C787]/15 blur-3xl pointer-events-none" />
+            <div className="absolute bottom-0 left-0 -ml-16 -mb-16 w-80 h-80 rounded-full bg-[#9E7A38]/20 blur-3xl pointer-events-none" />
+
+            {/* Foreground CTA Content */}
+            <div className="relative z-10 max-w-2xl mx-auto flex flex-col items-center">
+              {/* Eyebrow Badge */}
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest text-[#F8E7C8] bg-black/35 backdrop-blur-md border border-white/20 mb-6 shadow-sm">
+                <GraduationCap className="w-3.5 h-3.5 text-[#E6C687]" />
+                <span>Divine Aura Academy</span>
+              </div>
+
+              {/* Main Heading */}
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal leading-[1.2] text-white tracking-tight mb-4 drop-shadow-[0_2px_10px_rgba(0,0,0,0.4)]">
+                Ready to Start Your Journey?
+              </h2>
+
+              {/* Description Subtitle */}
+              <p className="text-white/95 text-[15px] sm:text-base lg:text-lg leading-relaxed font-light mb-8 sm:mb-10 max-w-xl mx-auto drop-shadow-[0_1px_6px_rgba(0,0,0,0.4)]">
+                Enquire now and take the first step towards building hands-on skill and confidence in beauty and wellness.
+              </p>
+
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
+                <Button
+                  to={`/contact?service=Academy%3A+${encodeURIComponent(ACADEMY_COURSE.title)}`}
+                  variant="light"
+                  size="lg"
+                  className="w-full sm:w-auto font-semibold !text-[#75561E] hover:!bg-[#FAF6F0] shadow-lg hover:shadow-xl transition-all duration-300"
+                >
+                  <span>Enquire Now</span>
+                  <ArrowRight className="w-4 h-4 ml-1 text-[#9E7A38]" />
+                </Button>
+                <Button
+                  to="/contact"
+                  variant="outlineWhite"
+                  size="lg"
+                  className="w-full sm:w-auto font-medium border-white/60 text-white hover:bg-white/15 backdrop-blur-sm shadow-md"
+                >
+                  <span>Visit Campus & Studio</span>
+                </Button>
+              </div>
             </div>
           </div>
         </SectionContainer>

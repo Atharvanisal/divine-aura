@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Calendar, Clock, CheckCircle2, AlertCircle, Loader2, Sparkles } from 'lucide-react';
+import { CheckCircle2, AlertCircle, Loader2, Sparkles } from 'lucide-react';
 import { BRAND } from '../data/siteData';
 
 // Backend-supported Divine Aura services
@@ -484,7 +484,7 @@ export default function AppointmentForm({ initialService = '' }) {
           </button>
         </div>
 
-        <p className="text-center text-[11px] text-warmBrown-500 pt-1">
+        <p className="text-center text-xs text-warmBrown-500 pt-1">
           By submitting, you agree to be contacted by Divine Aura regarding your appointment or enquiry.
         </p>
       </div>

@@ -74,7 +74,7 @@ export default function ServiceCard({ service, isActive = false, onToggle }) {
                     {highlights.map((point, idx) => (
                       <li
                         key={idx}
-                        className="flex items-start gap-2 text-xs sm:text-[13px] text-warmBrown-600 font-light leading-relaxed"
+                        className="flex items-start gap-2 text-[13.5px] sm:text-sm text-warmBrown-600 font-light leading-relaxed"
                       >
                         <span className="w-1.5 h-1.5 rounded-full bg-[#9E7A38]/70 shrink-0 mt-1.5" />
                         <span>{point}</span>

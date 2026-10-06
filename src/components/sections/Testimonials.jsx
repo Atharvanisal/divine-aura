@@ -49,6 +49,12 @@ export default function Testimonials({
     };
   }, [isHovered, isTouching]);
 
+  useEffect(() => {
+    return () => {
+      if (touchTimeoutRef.current) clearTimeout(touchTimeoutRef.current);
+    };
+  }, []);
+
   const handleTouchStart = () => {
     if (touchTimeoutRef.current) clearTimeout(touchTimeoutRef.current);
     setIsTouching(true);
@@ -84,26 +90,24 @@ export default function Testimonials({
             </p>
           )}
         </div>
-      </SectionContainer>
-
-      {/* Infinite Carousel Track Container */}
-      <div
-        className="relative w-full overflow-hidden"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-      >
-        {/* Soft Left & Right Fade Masks for editorial elegance */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-8 sm:w-16 lg:w-24 bg-gradient-to-r from-[#FAF6F0] to-transparent z-10" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-8 sm:w-16 lg:w-24 bg-gradient-to-l from-[#FAF6F0] to-transparent z-10" />
-
-        {/* Scrolling Flex Track */}
+        {/* Infinite Carousel Track Container */}
         <div
-          ref={scrollRef}
-          className="flex gap-6 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden py-4 px-6 sm:px-10 lg:px-16 cursor-grab active:cursor-grabbing"
-          style={{ WebkitOverflowScrolling: 'touch' }}
+          className="relative w-full overflow-hidden"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
         >
+          {/* Soft Left & Right Fade Masks for editorial elegance */}
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-8 sm:w-16 lg:w-24 bg-gradient-to-r from-[#FAF6F0] to-transparent z-10" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-8 sm:w-16 lg:w-24 bg-gradient-to-l from-[#FAF6F0] to-transparent z-10" />
+
+          {/* Scrolling Flex Track */}
+          <div
+            ref={scrollRef}
+            className="flex gap-6 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden py-4 cursor-grab active:cursor-grabbing"
+            style={{ WebkitOverflowScrolling: 'touch' }}
+          >
           {duplicatedReviews.map((testimonial, idx) => (
             <div
               key={`${testimonial.id}-${idx}`}
@@ -117,7 +121,7 @@ export default function Testimonials({
                 </div>
 
                 {/* Review Text */}
-                <p className="font-serif text-sm sm:text-base lg:text-[16.5px] text-espresso/90 leading-relaxed italic">
+                <p className="font-serif text-[15px] sm:text-base lg:text-[17px] text-espresso/90 leading-relaxed italic">
                   "{testimonial.quote}"
                 </p>
               </div>
@@ -140,6 +144,7 @@ export default function Testimonials({
           ))}
         </div>
       </div>
-    </section>
+    </SectionContainer>
+  </section>
   );
 }

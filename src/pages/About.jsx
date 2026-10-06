@@ -165,7 +165,7 @@ export default function About() {
                     <div className="w-6 h-6 rounded-full bg-[#FAF3E8] border border-[#E5D7BE] flex items-center justify-center shrink-0 text-[#9E7A38]">
                       <CheckCircle2 className="w-4 h-4" />
                     </div>
-                    <span className="text-sm sm:text-base text-espresso font-medium">
+                    <span className="text-[15px] sm:text-base text-espresso font-medium">
                       {point}
                     </span>
                   </div>
@@ -212,7 +212,7 @@ export default function About() {
                   <h4 className="font-serif text-lg sm:text-xl text-espresso mb-2">
                     {space.title}
                   </h4>
-                  <p className="text-xs sm:text-sm text-warmBrown-600 font-light leading-relaxed">
+                  <p className="text-sm sm:text-[15px] text-warmBrown-600 font-light leading-relaxed">
                     {space.description}
                   </p>
                 </div>

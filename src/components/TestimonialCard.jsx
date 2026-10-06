@@ -10,7 +10,7 @@ export default function TestimonialCard({ testimonial }) {
         <Quote className="w-8 h-8 sm:w-9 sm:h-9 rotate-180" />
       </div>
 
-      <p className="font-serif text-sm sm:text-base lg:text-[16.5px] text-espresso/90 leading-relaxed italic">
+      <p className="font-serif text-[15px] sm:text-base lg:text-[17px] text-espresso/90 leading-relaxed italic">
         "{quote}"
       </p>
 

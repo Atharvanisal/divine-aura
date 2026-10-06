@@ -153,19 +153,25 @@ export default function Contact() {
                   <span className="text-xs text-[#9E7A38] font-medium">Katraj-Kondhwa Road</span>
                 </div>
 
-                <div className="rounded-2xl overflow-hidden border border-[#EAE0D5] bg-[#EAE0D5] aspect-[16/9] relative">
+                <a
+                  href="https://maps.app.goo.gl/7Ds4EFtieMifzTnv6"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block rounded-2xl overflow-hidden border border-[#EAE0D5] bg-[#EAE0D5] aspect-[16/9] relative group cursor-pointer"
+                  title="Open Divine Aura location on Google Maps"
+                >
                   <iframe
                     title="Divine Aura Location Map"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15138.384218840248!2d73.86470395!3d18.45663715!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2ea93e36e7883%3A0x6a053cfa7c4a1610!2sKatraj%20-%20Kondhwa%20Rd%2C%20Pune%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3784.444747761895!2d73.86850837582572!3d18.447635182633036!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2eb8b26af5b69%3A0xe0cfbd252e934dd4!2sDivine%20Aura%20beauty%20salon%20and%20makeup%20academy%20%7C%20Katraj!5e0!3m2!1sen!2sin!4v1710000000000!5m2!1sen!2sin"
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
-                    allowFullScreen=""
+                    allowFullScreen
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
-                    className="w-full h-full"
+                    className="w-full h-full pointer-events-none"
                   ></iframe>
-                </div>
+                </a>
               </div>
 
               {/* Our Timings Card */}

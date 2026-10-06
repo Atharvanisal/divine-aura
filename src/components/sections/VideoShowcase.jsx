@@ -90,7 +90,7 @@ export default function VideoShowcase({
               src={videoSrc}
               poster={posterSrc}
               playsInline
-              preload="metadata"
+              preload="none"
               onPlay={() => setIsPlaying(true)}
               onPause={() => setIsPlaying(false)}
               onEnded={() => setIsPlaying(false)}
