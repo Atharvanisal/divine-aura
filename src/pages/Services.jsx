@@ -66,7 +66,7 @@ export default function Services() {
             href="#services-menu"
             className="inline-flex items-center gap-2 text-sm font-semibold text-[#9E7A38] hover:text-[#856529] px-4 py-2 transition-colors"
           >
-            <span>Explore Menu</span>
+            <span>Explore Services</span>
             <ArrowRight className="w-4 h-4" />
           </a>
         </div>
@@ -82,7 +82,7 @@ export default function Services() {
               <span>Salon Services</span>
             </div>
             <h2 className="font-serif text-3xl sm:text-4xl text-espresso font-normal">
-              Services Menu
+              Services
             </h2>
             <p className="mt-3 text-sm sm:text-base text-warmBrown-600 font-light">
               Explore our confirmed beauty treatments, designed with personal care and hygienic perfection.
