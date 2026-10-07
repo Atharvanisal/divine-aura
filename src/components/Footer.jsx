@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Phone, Mail, MapPin, Clock, Instagram, Facebook } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, Instagram } from 'lucide-react';
 import { BRAND } from '../data/siteData';
 
 export default function Footer() {
@@ -32,13 +32,6 @@ export default function Footer() {
               >
                 <Instagram className="w-4 h-4" />
               </a>
-              <span
-                aria-label="Facebook"
-                className="w-9 h-9 rounded-full bg-white border border-[#EAE0D5] flex items-center justify-center text-warmBrown-400 cursor-default"
-                title="Facebook"
-              >
-                <Facebook className="w-4 h-4" />
-              </span>
             </div>
           </div>
 

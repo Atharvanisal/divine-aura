@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Sparkles, Phone, Mail, MapPin, Clock, Instagram, Facebook, Heart } from 'lucide-react';
+import { Sparkles, Phone, Mail, MapPin, Clock, Instagram, Heart } from 'lucide-react';
 import AppointmentForm from '../components/AppointmentForm';
 import HeroSection from '../components/HeroSection';
 import SectionContainer from '../components/SectionContainer';
@@ -108,10 +108,16 @@ export default function Contact() {
                       <span className="block text-xs font-semibold text-warmBrown-500 uppercase tracking-wider">
                         Studio & Salon Location
                       </span>
-                      <p className="text-sm font-medium text-espresso leading-snug">
+                      <a
+                        href="https://maps.app.goo.gl/7Ds4EFtieMifzTnv6"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm font-medium text-espresso hover:text-[#9E7A38] transition-colors leading-snug block"
+                        title="Open Divine Aura location on Google Maps"
+                      >
                         {BRAND.address},<br />
                         {BRAND.city}
-                      </p>
+                      </a>
                     </div>
                   </li>
                 </ul>
@@ -130,15 +136,6 @@ export default function Contact() {
                       aria-label="Instagram"
                     >
                       <Instagram className="w-4 h-4" />
-                    </a>
-                    <a
-                      href={BRAND.social.facebook}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-8 h-8 rounded-full bg-white border border-[#EAE0D5] flex items-center justify-center text-warmBrown-700 hover:text-[#9E7A38] transition-colors"
-                      aria-label="Facebook"
-                    >
-                      <Facebook className="w-4 h-4" />
                     </a>
                   </div>
                 </div>

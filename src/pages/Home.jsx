@@ -71,7 +71,7 @@ export default function Home() {
             <div className="relative rounded-3xl overflow-hidden border-4 border-white shadow-xl bg-[#F3ECE1] aspect-[4/3] w-full">
               <img
                 src="/assets/owner_home_hero.jpg"
-                alt={`Founder & Master Stylist of ${BRAND.name}`}
+                alt="Nirmala Pansare - Founder (Divine Aura)"
                 className="w-full h-full object-cover object-[52%_44%]"
               />
             </div>
@@ -82,8 +82,8 @@ export default function Home() {
                 <Sparkles className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
               <div>
-                <p className="text-xs font-semibold text-espresso">Personal Care</p>
-                <p className="text-xs text-warmBrown-500">Tailored to your glow</p>
+                <p className="text-xs sm:text-sm font-semibold text-espresso">Nirmala Pansare</p>
+                <p className="text-[11px] sm:text-xs text-warmBrown-500 font-light">Founder (Divine Aura)</p>
               </div>
             </div>
           </div>
@@ -126,6 +126,10 @@ export default function Home() {
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-[#9E7A38]"></span>
             <span>Hands-on Academy</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-[#9E7A38]"></span>
+            <span>Beauty & Makeup Artistry</span>
           </div>
         </div>
       </HeroSection>
@@ -266,7 +270,7 @@ export default function Home() {
       {/* 6. TESTIMONIALS */}
       <Testimonials />
 
-      {/* 7. CURATED BEAUTY PRODUCTS SHOWCASE */}
+      {/* 7. PREMIUM BRANDS SHOWCASE */}
       <ProductsShowcase />
 
       {/* 8. FINAL CTA */}

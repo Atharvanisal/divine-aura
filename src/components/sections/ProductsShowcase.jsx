@@ -3,59 +3,64 @@ import { Sparkles } from 'lucide-react';
 import SectionContainer from '../SectionContainer';
 
 /**
- * Curated Beauty Products Showcase
+ * Premium Brands Showcase
  * Features continuous automatic infinite horizontal scrolling (right to left),
  * pause on hover, native touch/swipe support on mobile, and zero manual buttons.
- * Uses the proven infinite-loop architecture matching the Client Voices carousel.
+ * Displays only authentic product branding visuals for globally recognized care brands.
  */
-export const PRODUCTS_DATA = [
+export const BRANDS_DATA = [
   {
-    id: 'hair-care',
-    category: 'Hair Care',
-    name: 'Nourishing Hair Care',
-    description: 'Gentle formulas designed to cleanse, condition, and restore silky softness.',
-    image: '/assets/product_hair_care.jpg',
-    alt: 'Luxury hair care editorial bottle'
+    id: 'lotus-professional',
+    name: 'Lotus Professional',
+    image: '/assets/brands/lotus_professional.jpg',
+    alt: 'Lotus Professional'
   },
   {
-    id: 'skin-care',
-    category: 'Skin Care',
-    name: 'Radiance Skin Therapy',
-    description: 'Rejuvenating moisturizers and facial therapies crafted to nourish and refresh.',
-    image: '/assets/product_skin_care.jpg',
-    alt: 'Luxury skincare therapy jar and serum'
+    id: 'rica-made-in-italy',
+    name: 'RICA Made in Italy',
+    image: '/assets/brands/rica_made_in_italy.png',
+    alt: 'RICA Made in Italy'
   },
   {
-    id: 'face-beauty',
-    category: 'Face & Beauty Care',
-    name: 'Clarifying Face Care',
-    description: 'Refreshing botanical mists and gentle balancing treatments for a clean glow.',
-    image: '/assets/product_face_care.jpg',
-    alt: 'Luxury clarifying facial mist bottle'
+    id: 'loreal-professionnel-paris',
+    name: "L'Oréal Professionnel Paris",
+    image: '/assets/brands/loreal_professionnel.png',
+    alt: "L'Oréal Professionnel Paris"
   },
   {
-    id: 'body-care',
-    category: 'Body Care',
-    name: 'Gentle Body Care',
-    description: 'Smoothing lotions and soothing balms designed for deep comfort and relaxation.',
-    image: '/assets/product_body_care.jpg',
-    alt: 'Luxury body lotion and balm containers'
+    id: 'shahnaz-husain',
+    name: 'Shahnaz Husain',
+    image: '/assets/brands/shahnaz_husain.png',
+    alt: 'Shahnaz Husain'
   },
   {
-    id: 'professional-essentials',
-    category: 'Professional Essentials',
-    name: 'Salon Care Elixirs',
-    description: 'Concentrated care elixirs formulated to protect, enhance shine, and seal in beauty.',
-    image: '/assets/product_pro_essentials.jpg',
-    alt: 'Luxury professional salon elixir bottle'
+    id: 'de-fabulous',
+    name: 'DE FABULOUS',
+    image: '/assets/brands/de_fabulous.jpg',
+    alt: 'DE FABULOUS'
+  },
+  {
+    id: 'schwarzkopf',
+    name: 'Schwarzkopf',
+    image: '/assets/brands/schwarzkopf.jpg',
+    alt: 'Schwarzkopf'
+  },
+  {
+    id: 'inoa',
+    name: 'INOA',
+    image: '/assets/brands/inoa.jpg',
+    alt: 'INOA'
   }
 ];
 
+// Retain alias for backwards compatibility
+export const PRODUCTS_DATA = BRANDS_DATA;
+
 export default function ProductsShowcase({
-  products = PRODUCTS_DATA,
-  eyebrow = "Curated Essentials",
-  title = "Beauty Products We Love",
-  description = "Thoughtfully selected beauty essentials designed to complement your salon care and everyday beauty routine.",
+  brands = BRANDS_DATA,
+  eyebrow = "Premium Brands",
+  title = "Premium Brands for Premium Care",
+  description = "We use globally recognized brands to ensure the best results for your skin and hair.",
   className = ""
 }) {
   const scrollRef = useRef(null);
@@ -63,8 +68,8 @@ export default function ProductsShowcase({
   const [isTouching, setIsTouching] = useState(false);
   const touchTimeoutRef = useRef(null);
 
-  // Duplicate product items to create a seamless infinite loop track
-  const duplicatedProducts = [...products, ...products];
+  // Duplicate brand items to create a seamless infinite loop track
+  const duplicatedBrands = [...brands, ...brands];
 
   useEffect(() => {
     const container = scrollRef.current;
@@ -156,46 +161,27 @@ export default function ProductsShowcase({
             className="flex gap-6 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden py-4 cursor-grab active:cursor-grabbing"
             style={{ WebkitOverflowScrolling: 'touch' }}
           >
-            {duplicatedProducts.map((product, idx) => (
+            {duplicatedBrands.map((brand, idx) => (
               <div
-                key={`${product.id}-${idx}`}
-                data-card="product"
-                className="w-[76vw] max-w-[280px] sm:w-[300px] lg:w-[320px] shrink-0 bg-[#FAF6F0] rounded-3xl p-5 sm:p-6 border border-[#EAE0D5] shadow-card hover:shadow-luxury transition-all duration-300 flex flex-col justify-between select-none group"
+                key={`${brand.id}-${idx}`}
+                data-card="brand"
+                className="w-[72vw] max-w-[280px] sm:w-[300px] lg:w-[320px] shrink-0 bg-[#FAF6F0] rounded-3xl p-5 sm:p-6 border border-[#EAE0D5] shadow-card hover:shadow-luxury transition-all duration-300 flex flex-col items-center select-none group"
               >
-                <div>
-                  {/* 1. Product Image */}
-                  <div className="rounded-2xl overflow-hidden aspect-[4/3] bg-[#F3ECE1] mb-5 relative">
-                    <img
-                      src={product.image}
-                      alt={product.alt || product.name}
-                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 select-none"
-                      loading="lazy"
-                    />
-                  </div>
-
-                  {/* 2. Product Category / Label */}
-                  <div className="mb-2.5">
-                    <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-[#856529] bg-white border border-[#EAE0D5] shadow-2xs">
-                      {product.category}
-                    </span>
-                  </div>
-
-                  {/* 3. Product Name */}
-                  <h3 className="font-serif text-lg sm:text-xl text-espresso font-normal leading-snug mb-2">
-                    {product.name}
-                  </h3>
-
-                  {/* 4. Short Description */}
-                  <p className="text-sm sm:text-[15px] text-warmBrown-600 font-light leading-relaxed">
-                    {product.description}
-                  </p>
+                {/* 1. Original Branded Product Image */}
+                <div className="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-white border border-[#EAE0D5]/70 flex items-center justify-center p-3 sm:p-4 relative shadow-2xs">
+                  <img
+                    src={brand.image}
+                    alt={brand.alt || brand.name}
+                    className="w-full h-full object-contain transition-transform duration-500 ease-out group-hover:scale-105 select-none"
+                    loading="lazy"
+                    draggable={false}
+                  />
                 </div>
 
-                {/* Card Footer */}
-                <div className="mt-5 pt-4 border-t border-[#EAE0D5]/70 flex items-center justify-between text-xs text-warmBrown-500 font-light">
-                  <span>Care Collection</span>
-                  <Sparkles className="w-3.5 h-3.5 text-[#9E7A38]" />
-                </div>
+                {/* 2. Brand Name */}
+                <h3 className="mt-4 sm:mt-5 font-serif text-base sm:text-lg font-medium text-espresso text-center tracking-wide leading-snug">
+                  {brand.name}
+                </h3>
               </div>
             ))}
           </div>
