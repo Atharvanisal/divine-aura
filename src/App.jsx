@@ -7,13 +7,17 @@ import About from './pages/About';
 import Services from './pages/Services';
 import Academy from './pages/Academy';
 import Contact from './pages/Contact';
+import FloatingContactButton from './components/FloatingContactButton';
 
 // Scroll to top and update document title on every navigation
 function NavigationHandler() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Only scroll to top if not navigating to a hash anchor
+    if (!hash) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
     const titles = {
       '/': 'Divine Aura | Beauty & Academy',
@@ -24,7 +28,7 @@ function NavigationHandler() {
     };
 
     document.title = titles[pathname] || 'Divine Aura | Beauty & Academy';
-  }, [pathname]);
+  }, [pathname, hash]);
 
   return null;
 }
@@ -46,6 +50,7 @@ export default function App() {
         </Routes>
       </main>
       <Footer />
+      <FloatingContactButton />
     </div>
   );
 }

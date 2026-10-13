@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Sparkles } from 'lucide-react';
 import SectionContainer from '../SectionContainer';
+import Reveal from '../Reveal';
 
 /**
  * Premium Brands Showcase
@@ -28,28 +29,46 @@ export const BRANDS_DATA = [
     alt: "L'Oréal Professionnel Paris"
   },
   {
-    id: 'shahnaz-husain',
-    name: 'Shahnaz Husain',
-    image: '/assets/brands/shahnaz_husain.png',
-    alt: 'Shahnaz Husain'
+    id: 'kryolan',
+    name: 'Kryolan',
+    image: '/assets/brands/kryolan.jpg',
+    alt: 'Kryolan'
   },
   {
-    id: 'de-fabulous',
-    name: 'DE FABULOUS',
-    image: '/assets/brands/de_fabulous.jpg',
-    alt: 'DE FABULOUS'
+    id: 'huda-beauty',
+    name: 'Huda Beauty',
+    image: '/assets/brands/huda_beauty.webp',
+    alt: 'Huda Beauty'
   },
   {
-    id: 'schwarzkopf',
-    name: 'Schwarzkopf',
-    image: '/assets/brands/schwarzkopf.jpg',
-    alt: 'Schwarzkopf'
+    id: 'nars',
+    name: 'NARS',
+    image: '/assets/brands/nars.jpg',
+    alt: 'NARS'
   },
   {
-    id: 'inoa',
-    name: 'INOA',
-    image: '/assets/brands/inoa.jpg',
-    alt: 'INOA'
+    id: 'la-girl',
+    name: 'L.A. Girl',
+    image: '/assets/brands/la_girl.jpg',
+    alt: 'L.A. Girl'
+  },
+  {
+    id: 'elf-cosmetics',
+    name: 'e.l.f. Cosmetics',
+    image: '/assets/brands/elf_cosmetics.png',
+    alt: 'e.l.f. Cosmetics'
+  },
+  {
+    id: 'mac-cosmetics',
+    name: 'M·A·C Cosmetics',
+    image: '/assets/brands/mac_cosmetics.png',
+    alt: 'M·A·C Cosmetics'
+  },
+  {
+    id: 'forever52',
+    name: 'Forever52',
+    image: '/assets/brands/forever52.png',
+    alt: 'Forever52'
   }
 ];
 
@@ -126,66 +145,74 @@ export default function ProductsShowcase({
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12 lg:mb-14">
           {eyebrow && (
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest text-[#9E7A38] bg-[#F4ECDC] border border-[#E5D7BE] mb-3">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>{eyebrow}</span>
-            </div>
+            <Reveal variant="fade-up" duration={1050} delay={0}>
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest text-[#9E7A38] bg-[#F4ECDC] border border-[#E5D7BE] mb-3">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>{eyebrow}</span>
+              </div>
+            </Reveal>
           )}
           {title && (
-            <h2 className="font-serif text-3xl sm:text-4xl text-espresso font-normal">
-              {title}
-            </h2>
+            <Reveal variant="fade-up" duration={1100} delay={160}>
+              <h2 className="font-serif text-3xl sm:text-4xl text-espresso font-normal">
+                {title}
+              </h2>
+            </Reveal>
           )}
           {description && (
-            <p className="mt-3 text-[15px] sm:text-base lg:text-lg text-warmBrown-600 font-light leading-relaxed">
-              {description}
-            </p>
+            <Reveal variant="fade-up" duration={1100} delay={320}>
+              <p className="mt-3 text-[15px] sm:text-base lg:text-lg text-warmBrown-600 font-light leading-relaxed">
+                {description}
+              </p>
+            </Reveal>
           )}
         </div>
 
         {/* Infinite Carousel Track Container */}
-        <div
-          className="relative w-full overflow-hidden"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-          onTouchStart={handleTouchStart}
-          onTouchEnd={handleTouchEnd}
-        >
-          {/* Soft Left & Right Fade Masks for editorial elegance */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-8 sm:w-16 lg:w-20 bg-gradient-to-r from-white to-transparent z-10" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-8 sm:w-16 lg:w-20 bg-gradient-to-l from-white to-transparent z-10" />
-
-          {/* Scrolling Flex Track */}
+        <Reveal variant="fade-up" duration={1050} delay={180}>
           <div
-            ref={scrollRef}
-            className="flex gap-6 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden py-4 cursor-grab active:cursor-grabbing"
-            style={{ WebkitOverflowScrolling: 'touch' }}
+            className="relative w-full overflow-hidden"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
           >
-            {duplicatedBrands.map((brand, idx) => (
-              <div
-                key={`${brand.id}-${idx}`}
-                data-card="brand"
-                className="w-[72vw] max-w-[280px] sm:w-[300px] lg:w-[320px] shrink-0 bg-[#FAF6F0] rounded-3xl p-5 sm:p-6 border border-[#EAE0D5] shadow-card hover:shadow-luxury transition-all duration-300 flex flex-col items-center select-none group"
-              >
-                {/* 1. Original Branded Product Image */}
-                <div className="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-white border border-[#EAE0D5]/70 flex items-center justify-center p-3 sm:p-4 relative shadow-2xs">
-                  <img
-                    src={brand.image}
-                    alt={brand.alt || brand.name}
-                    className="w-full h-full object-contain transition-transform duration-500 ease-out group-hover:scale-105 select-none"
-                    loading="lazy"
-                    draggable={false}
-                  />
-                </div>
+            {/* Soft Left & Right Fade Masks for editorial elegance */}
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-8 sm:w-16 lg:w-20 bg-gradient-to-r from-white to-transparent z-10" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-8 sm:w-16 lg:w-20 bg-gradient-to-l from-white to-transparent z-10" />
 
-                {/* 2. Brand Name */}
-                <h3 className="mt-4 sm:mt-5 font-serif text-base sm:text-lg font-medium text-espresso text-center tracking-wide leading-snug">
-                  {brand.name}
-                </h3>
-              </div>
-            ))}
+            {/* Scrolling Flex Track */}
+            <div
+              ref={scrollRef}
+              className="flex gap-6 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden py-4 cursor-grab active:cursor-grabbing"
+              style={{ WebkitOverflowScrolling: 'touch' }}
+            >
+              {duplicatedBrands.map((brand, idx) => (
+                <div
+                  key={`${brand.id}-${idx}`}
+                  data-card="brand"
+                  className="w-[72vw] max-w-[280px] sm:w-[300px] lg:w-[320px] shrink-0 bg-[#FAF6F0] rounded-3xl p-5 sm:p-6 border border-[#EAE0D5] shadow-card hover:shadow-luxury transition-all duration-300 flex flex-col items-center select-none group"
+                >
+                  {/* 1. Original Branded Product Image */}
+                  <div className="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-white border border-[#EAE0D5]/70 flex items-center justify-center p-3 sm:p-4 relative shadow-2xs">
+                    <img
+                      src={brand.image}
+                      alt={brand.alt || brand.name}
+                      className="w-full h-full object-contain transition-transform duration-500 ease-out group-hover:scale-[1.03] select-none"
+                      loading="lazy"
+                      draggable={false}
+                    />
+                  </div>
+
+                  {/* 2. Brand Name */}
+                  <h3 className="mt-4 sm:mt-5 font-serif text-base sm:text-lg font-medium text-espresso text-center tracking-wide leading-snug">
+                    {brand.name}
+                  </h3>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        </Reveal>
       </SectionContainer>
     </section>
   );

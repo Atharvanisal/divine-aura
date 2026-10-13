@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Quote, Sparkles } from 'lucide-react';
 import SectionContainer from '../SectionContainer';
+import Reveal from '../Reveal';
 import { TESTIMONIALS } from '../../data/siteData';
 
 /**
@@ -74,22 +75,29 @@ export default function Testimonials({
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12 lg:mb-14">
           {eyebrow && (
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest text-[#9E7A38] bg-[#F4ECDC] border border-[#E5D7BE] mb-3">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>{eyebrow}</span>
-            </div>
+            <Reveal variant="fade-up" duration={1050} delay={0}>
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest text-[#9E7A38] bg-[#F4ECDC] border border-[#E5D7BE] mb-3">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>{eyebrow}</span>
+              </div>
+            </Reveal>
           )}
           {title && (
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-4.5xl text-espresso font-normal leading-tight">
-              {title}
-            </h2>
+            <Reveal variant="fade-up" duration={1100} delay={160}>
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-4.5xl text-espresso font-normal leading-tight">
+                {title}
+              </h2>
+            </Reveal>
           )}
           {subtitle && (
-            <p className="mt-3.5 text-base sm:text-lg text-warmBrown-600 font-light leading-relaxed">
-              {subtitle}
-            </p>
+            <Reveal variant="fade-up" duration={1100} delay={320}>
+              <p className="mt-3.5 text-base sm:text-lg text-warmBrown-600 font-light leading-relaxed">
+                {subtitle}
+              </p>
+            </Reveal>
           )}
         </div>
+
         {/* Infinite Carousel Track Container */}
         <div
           className="relative w-full overflow-hidden"

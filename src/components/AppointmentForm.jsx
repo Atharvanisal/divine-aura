@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { CheckCircle2, AlertCircle, Loader2, Sparkles } from 'lucide-react';
+import Reveal from './Reveal';
 import { BRAND } from '../data/siteData';
 
 // Backend-supported Divine Aura services
@@ -250,18 +251,20 @@ export default function AppointmentForm({ initialService = '' }) {
       noValidate
       className="bg-white rounded-3xl p-6 sm:p-10 border border-[#EAE0D5] shadow-luxury"
     >
-      <div className="mb-6 pb-4 border-b border-[#F2EAE0]">
-        <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#9E7A38]">
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>Appointment & Enquiry</span>
+      <Reveal variant="fade-up" duration={950} delay={100}>
+        <div className="mb-6 pb-4 border-b border-[#F2EAE0]">
+          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#9E7A38]">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Appointment & Enquiry</span>
+          </div>
+          <h3 className="font-serif text-2xl text-espresso mt-1">
+            Reserve Your Experience
+          </h3>
+          <p className="text-xs sm:text-sm text-warmBrown-600 mt-1">
+            Fill out the details below to schedule your visit or enquire about academy courses.
+          </p>
         </div>
-        <h3 className="font-serif text-2xl text-espresso mt-1">
-          Reserve Your Experience
-        </h3>
-        <p className="text-xs sm:text-sm text-warmBrown-600 mt-1">
-          Fill out the details below to schedule your visit or enquire about academy courses.
-        </p>
-      </div>
+      </Reveal>
 
       {/* Top-Level Frontend Validation Error Banner */}
       {formError && (

@@ -23,6 +23,18 @@ dist-ssr
 *.sln
 *.sw?
 
+# Tooling and agent workspace files
+.agent
+.agents
+.gemini
+.gsd
+GSD-STYLE.md
+PROJECT_RULES.md
+VERSION
+adapters
+model_capabilities.yaml
+scripts
+
 # Environment variables & secrets
 .env
 .env.*

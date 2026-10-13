@@ -4,10 +4,13 @@ import SectionHeading from '../components/SectionHeading';
 import HeroSection from '../components/HeroSection';
 import SectionContainer from '../components/SectionContainer';
 import Button from '../components/Button';
+import Reveal from '../components/Reveal';
+import useScrollReveal from '../hooks/useScrollReveal';
 import { BRAND, ACADEMY_COURSE, ACADEMY_BENEFITS, ACADEMY_CERTIFICATIONS } from '../data/siteData';
 
 export default function Academy() {
   const [activeCert, setActiveCert] = useState(null);
+  const [ctaCardRef, isCtaCardVisible] = useScrollReveal({ threshold: 0.1 });
 
   useEffect(() => {
     if (activeCert) {
@@ -24,76 +27,88 @@ export default function Academy() {
   }, [activeCert]);
 
   return (
-    <div className="animate-fadeIn">
+    <div>
 
       {/* 1. HERO SECTION */}
       <HeroSection
         visual={
           <div className="relative w-full max-w-sm sm:max-w-md lg:max-w-lg">
-            <div className="relative rounded-3xl overflow-hidden border-4 border-white shadow-xl bg-[#F3ECE1] aspect-[4/3] w-full">
-              <img
-                src="/assets/academy_hero_editorial.jpg"
-                alt={`${BRAND.name} Academy training studio and learning stations`}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent flex items-end p-6">
-                <p className="text-white text-xs sm:text-sm font-medium">
-                  Modern training studio & learning stations at Divine Aura Academy
-                </p>
+            <Reveal variant="fade-left" withScale={true} duration={1200} delay={150}>
+              <div className="relative rounded-3xl overflow-hidden border-4 border-white shadow-xl bg-[#F3ECE1] aspect-[4/3] w-full">
+                <img
+                  src="/assets/academy_hero_editorial.jpg"
+                  alt={`${BRAND.name} Academy training studio and learning stations`}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent flex items-end p-6">
+                  <p className="text-white text-xs sm:text-sm font-medium">
+                    Modern training studio & learning stations at Divine Aura Academy
+                  </p>
+                </div>
               </div>
-            </div>
+            </Reveal>
           </div>
         }
       >
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest text-[#9E7A38] bg-[#F4ECDC] border border-[#E5D7BE]">
-          <GraduationCap className="w-3.5 h-3.5" />
-          <span>Learn • Practice • Build Your Future</span>
-        </div>
+        <Reveal variant="fade-up" duration={1100} delay={0}>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest text-[#9E7A38] bg-[#F4ECDC] border border-[#E5D7BE]">
+            <GraduationCap className="w-3.5 h-3.5" />
+            <span>Learn • Practice • Build Your Future</span>
+          </div>
+        </Reveal>
 
-        <h1 className="font-serif text-4xl sm:text-5xl lg:text-5.5xl text-espresso font-normal leading-[1.15]">
-          {BRAND.name} Academy
-        </h1>
+        <Reveal variant="fade-up" duration={1150} delay={160}>
+          <h1 className="font-serif text-4xl sm:text-5xl lg:text-5.5xl text-espresso font-normal leading-[1.15]">
+            {BRAND.name} Academy
+          </h1>
+        </Reveal>
 
-        <p className="text-base sm:text-lg text-warmBrown-600 font-light leading-relaxed max-w-xl">
-          Join our professional beauty academy and gain hands-on training from experienced practitioners. We offer dedicated learning programs to help you develop authentic craft in the beauty and wellness industry.
-        </p>
+        <Reveal variant="fade-up" duration={1150} delay={320}>
+          <p className="text-base sm:text-lg text-warmBrown-600 font-light leading-relaxed max-w-xl">
+            Join our professional beauty academy and gain hands-on training from experienced practitioners. We offer dedicated learning programs to help you develop authentic craft in the beauty and wellness industry.
+          </p>
+        </Reveal>
 
-        <div className="pt-2 flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4 w-full sm:w-auto">
-          <Button
-            to={`/contact?service=Academy%3A+${encodeURIComponent(ACADEMY_COURSE.title)}`}
-            size="lg"
-            className="w-full sm:w-auto"
-          >
-            <span>Enquire About Course</span>
-            <ArrowRight className="w-4 h-4 ml-1" />
-          </Button>
-          <a
-            href="#course-section"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-[#9E7A38] hover:text-[#856529] px-4 py-2 transition-colors"
-          >
-            <span>View Syllabus</span>
-            <ArrowRight className="w-4 h-4" />
-          </a>
-        </div>
+        <Reveal variant="fade-up" duration={1050} delay={480} className="w-full sm:w-auto">
+          <div className="pt-2 flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4 w-full sm:w-auto">
+            <Button
+              to={`/contact?service=Academy%3A+${encodeURIComponent(ACADEMY_COURSE.title)}`}
+              size="lg"
+              className="w-full sm:w-auto"
+            >
+              <span>Enquire About Course</span>
+              <ArrowRight className="w-4 h-4 ml-1" />
+            </Button>
+            <a
+              href="#course-section"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-[#9E7A38] hover:text-[#856529] px-4 py-2 transition-colors"
+            >
+              <span>View Syllabus</span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
+        </Reveal>
 
         {/* Learning Highlights */}
-        <div className="pt-6 border-t border-[#EAE0D5] grid grid-cols-3 gap-4 text-center lg:text-left w-full">
-          <div>
-            <p className="font-serif text-xl sm:text-2xl text-espresso font-normal">Hands-On</p>
-            <p className="text-xs text-warmBrown-500 font-light mt-0.5">Live practical work</p>
+        <Reveal variant="fade-up" duration={1100} delay={640} className="w-full">
+          <div className="pt-6 border-t border-[#EAE0D5] grid grid-cols-3 gap-4 text-center lg:text-left w-full">
+            <div>
+              <p className="font-serif text-xl sm:text-2xl text-espresso font-normal">Hands-On</p>
+              <p className="text-xs text-warmBrown-500 font-light mt-0.5">Live practical work</p>
+            </div>
+            <div>
+              <p className="font-serif text-xl sm:text-2xl text-espresso font-normal">Mentorship</p>
+              <p className="text-xs text-warmBrown-500 font-light mt-0.5">Direct guidance</p>
+            </div>
+            <div>
+              <p className="font-serif text-xl sm:text-2xl text-espresso font-normal">Modern</p>
+              <p className="text-xs text-warmBrown-500 font-light mt-0.5">Equipped studio</p>
+            </div>
           </div>
-          <div>
-            <p className="font-serif text-xl sm:text-2xl text-espresso font-normal">Mentorship</p>
-            <p className="text-xs text-warmBrown-500 font-light mt-0.5">Direct guidance</p>
-          </div>
-          <div>
-            <p className="font-serif text-xl sm:text-2xl text-espresso font-normal">Modern</p>
-            <p className="text-xs text-warmBrown-500 font-light mt-0.5">Equipped studio</p>
-          </div>
-        </div>
+        </Reveal>
       </HeroSection>
 
-      {/* 2. CONFIRMED ACADEMY COURSE & 12-POINT SYLLABUS */}
+      {/* 2. CONFIRMED ACADEMY COURSE & 11-POINT SYLLABUS */}
       <section id="course-section" className="py-12 sm:py-16 lg:py-20 bg-white">
         <SectionContainer>
           <SectionHeading
@@ -102,40 +117,48 @@ export default function Academy() {
             subtitle={ACADEMY_COURSE.description}
           />
 
-          {/* Dedicated Course Card & 12-Point Numbered Syllabus */}
+          {/* Dedicated Course Card & 11-Point Numbered Syllabus */}
           <div className="max-w-5xl mx-auto bg-[#FAF6F0] rounded-3xl p-6 sm:p-10 border border-[#EAE0D5] shadow-luxury">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-[#EAE0D5] gap-4">
-              <div>
-                <span className="text-xs font-semibold uppercase tracking-widest text-[#9E7A38]">
-                  Curriculum & Training Modules
-                </span>
-                <h3 className="font-serif text-2xl sm:text-3xl text-espresso mt-1">
-                  12-Point Course Syllabus
-                </h3>
+            <Reveal variant="fade-up" duration={1050} delay={0}>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-[#EAE0D5] gap-4">
+                <div>
+                  <span className="text-xs font-semibold uppercase tracking-widest text-[#9E7A38]">
+                    Curriculum & Training Modules
+                  </span>
+                  <h3 className="font-serif text-2xl sm:text-3xl text-espresso mt-1">
+                    11-Point Course Syllabus
+                  </h3>
+                </div>
+                <Button
+                  to={`/contact?service=Academy%3A+${encodeURIComponent(ACADEMY_COURSE.title)}`}
+                  size="md"
+                >
+                  <span>Enquire Now</span>
+                  <ArrowRight className="w-4 h-4 ml-1" />
+                </Button>
               </div>
-              <Button
-                to={`/contact?service=Academy%3A+${encodeURIComponent(ACADEMY_COURSE.title)}`}
-                size="md"
-              >
-                <span>Enquire Now</span>
-                <ArrowRight className="w-4 h-4 ml-1" />
-              </Button>
-            </div>
+            </Reveal>
 
-            {/* 12-Point Syllabus Responsive Grid */}
+            {/* 11-Point Syllabus Responsive Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-8">
               {ACADEMY_COURSE.syllabus.map((point, index) => (
-                <div
+                <Reveal
                   key={index}
-                  className="flex items-center gap-3.5 p-4 rounded-2xl bg-white border border-[#EAE0D5]/80 hover:border-[#9E7A38]/40 hover:shadow-sm transition-all group"
+                  variant="fade-up"
+                  duration={850}
+                  delay={100 + index * 60}
                 >
-                  <span className="w-8 h-8 rounded-full bg-[#FAF3E8] border border-[#E5D7BE] text-[#9E7A38] text-xs font-semibold flex items-center justify-center shrink-0 group-hover:bg-[#9E7A38] group-hover:text-white transition-colors">
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
-                  <span className="text-[15px] font-medium text-espresso leading-relaxed">
-                    {point}
-                  </span>
-                </div>
+                  <div
+                    className="flex items-center gap-3.5 p-4 rounded-2xl bg-white border border-[#EAE0D5]/80 hover:border-[#9E7A38]/40 hover:shadow-sm transition-all group h-full"
+                  >
+                    <span className="w-8 h-8 rounded-full bg-[#FAF3E8] border border-[#E5D7BE] text-[#9E7A38] text-xs font-semibold flex items-center justify-center shrink-0 group-hover:bg-[#9E7A38] group-hover:text-white transition-colors">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <span className="text-[15px] font-medium text-espresso leading-relaxed">
+                      {point}
+                    </span>
+                  </div>
+                </Reveal>
               ))}
             </div>
           </div>
@@ -150,41 +173,61 @@ export default function Academy() {
             
             {/* Why Choose Column */}
             <div className="lg:col-span-5 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-widest text-[#9E7A38] bg-[#F4ECDC] border border-[#E5D7BE]">
-                <Award className="w-3.5 h-3.5" />
-                <span>Training Standards</span>
-              </div>
+              <Reveal variant="fade-up" duration={1000} delay={0}>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-widest text-[#9E7A38] bg-[#F4ECDC] border border-[#E5D7BE]">
+                  <Award className="w-3.5 h-3.5" />
+                  <span>Training Standards</span>
+                </div>
+              </Reveal>
 
-              <h2 className="font-serif text-3xl sm:text-4xl text-espresso font-normal">
-                Why Choose Our Academy?
-              </h2>
+              <Reveal variant="fade-up" duration={1050} delay={150}>
+                <h2 className="font-serif text-3xl sm:text-4xl text-espresso font-normal">
+                  Why Choose Our Academy?
+                </h2>
+              </Reveal>
 
-              <p className="text-sm sm:text-base text-warmBrown-600 font-light leading-relaxed">
-                We believe in learning through doing. Our academy provides an encouraging and professional atmosphere where you practice under individual mentor attention.
-              </p>
+              <Reveal variant="fade-up" duration={1050} delay={300}>
+                <p className="text-sm sm:text-base text-warmBrown-600 font-light leading-relaxed">
+                  We believe in learning through doing. Our academy provides an encouraging and professional atmosphere where you practice under individual mentor attention.
+                </p>
+              </Reveal>
 
               <div className="space-y-3.5 pt-2">
                 {ACADEMY_BENEFITS.map((benefit, i) => (
-                  <div key={i} className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-white border border-[#EAE0D5]">
-                    <div className="w-6 h-6 rounded-full bg-[#FAF3E8] border border-[#E5D7BE] flex items-center justify-center shrink-0 text-[#9E7A38]">
-                      <CheckCircle2 className="w-4 h-4" />
+                  <Reveal
+                    key={i}
+                    variant="fade-up"
+                    duration={900}
+                    delay={380 + i * 110}
+                  >
+                    <div className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-white border border-[#EAE0D5]">
+                      <div className="w-6 h-6 rounded-full bg-[#FAF3E8] border border-[#E5D7BE] flex items-center justify-center shrink-0 text-[#9E7A38]">
+                        <CheckCircle2 className="w-4 h-4" />
+                      </div>
+                      <span className="text-[15px] sm:text-base text-espresso font-medium">
+                        {benefit}
+                      </span>
                     </div>
-                    <span className="text-[15px] sm:text-base text-espresso font-medium">
-                      {benefit}
-                    </span>
-                  </div>
+                  </Reveal>
                 ))}
               </div>
 
-              <div className="pt-4">
-                <Button to="/contact?service=Academy%3A+General+Course+Enquiry" size="md">
-                  <span>Inquire for Upcoming Batches</span>
-                </Button>
-              </div>
+              <Reveal variant="fade-up" duration={950} delay={380 + ACADEMY_BENEFITS.length * 110}>
+                <div className="pt-4">
+                  <Button to="/contact?service=Academy%3A+General+Course+Enquiry" size="md">
+                    <span>Inquire for Upcoming Batches</span>
+                  </Button>
+                </div>
+              </Reveal>
             </div>
 
             {/* Academy Moments Certification Gallery */}
-            <div className="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-8 lg:p-10 border border-[#EAE0D5] shadow-card space-y-6">
+            <Reveal
+              variant="fade-left"
+              duration={1050}
+              delay={150}
+              className="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-8 lg:p-10 border border-[#EAE0D5] shadow-card space-y-6"
+            >
               <div className="flex items-center justify-between pb-5 border-b border-[#F2EAE0]">
                 <div>
                   <h3 className="font-serif text-2xl sm:text-3xl text-espresso font-normal">
@@ -202,30 +245,37 @@ export default function Academy() {
               {/* Responsive Gallery Grid of Actual Uploaded Certification & Group Images */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-4 lg:gap-4.5">
                 {ACADEMY_CERTIFICATIONS.map((item, index) => (
-                  <div
+                  <Reveal
                     key={item.id || index}
-                    onClick={() => setActiveCert(item)}
-                    className="group relative cursor-pointer overflow-hidden rounded-2xl bg-[#FAF6F0] border border-[#EAE0D5] shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col"
+                    variant="fade-up"
+                    withScale={true}
+                    duration={950}
+                    delay={250 + index * 160}
                   >
-                    <div className="relative aspect-[9/16] w-full overflow-hidden bg-[#F3ECE1]">
-                      <img
-                        src={item.src}
-                        alt={item.alt || `Divine Aura Academy Moment ${index + 1}`}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-103"
-                        loading="lazy"
-                      />
-                      {/* Subtle hover overlay with view badge */}
-                      <div className="absolute inset-0 bg-espresso/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-3">
-                        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/95 text-espresso text-xs font-semibold shadow-lg backdrop-blur-sm transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                          <ZoomIn className="w-3.5 h-3.5 text-[#9E7A38]" />
-                          <span>View Photo</span>
-                        </span>
+                    <div
+                      onClick={() => setActiveCert(item)}
+                      className="group relative cursor-pointer overflow-hidden rounded-2xl bg-[#FAF6F0] border border-[#EAE0D5] shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col"
+                    >
+                      <div className="relative aspect-[9/16] w-full overflow-hidden bg-[#F3ECE1]">
+                        <img
+                          src={item.src}
+                          alt={item.alt || `Divine Aura Academy Moment ${index + 1}`}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-103"
+                          loading="lazy"
+                        />
+                        {/* Subtle hover overlay with view badge */}
+                        <div className="absolute inset-0 bg-espresso/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-3">
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/95 text-espresso text-xs font-semibold shadow-lg backdrop-blur-sm transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                            <ZoomIn className="w-3.5 h-3.5 text-[#9E7A38]" />
+                            <span>View Photo</span>
+                          </span>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </Reveal>
                 ))}
               </div>
-            </div>
+            </Reveal>
 
           </div>
 
@@ -235,10 +285,15 @@ export default function Academy() {
       {/* 4. READY TO START YOUR JOURNEY BANNER */}
       <section className="py-12 sm:py-16 lg:py-20 bg-[#FAF6F0] relative overflow-hidden">
         <SectionContainer>
-          <div className="relative rounded-3xl sm:rounded-[2.5rem] overflow-hidden shadow-2xl border border-[#EAE0D5] text-center p-8 sm:p-14 lg:p-20 bg-[#1E1712]">
+          <div
+            ref={ctaCardRef}
+            className="relative rounded-3xl sm:rounded-[2.5rem] overflow-hidden shadow-2xl border border-[#EAE0D5] text-center p-8 sm:p-14 lg:p-20 bg-[#1E1712]"
+          >
             {/* Full-Cover Editorial Academy Background Image */}
             <div
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-1000 ease-out hover:scale-105"
+              className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-[1200ms] ease-out ${
+                isCtaCardVisible ? 'scale-100 opacity-100' : 'scale-[0.98] opacity-90'
+              }`}
               style={{ backgroundImage: "url('/assets/cta_academy_bg.jpg')" }}
               role="img"
               aria-label="Divine Aura beauty academy training studio"
@@ -261,41 +316,49 @@ export default function Academy() {
             {/* Foreground CTA Content */}
             <div className="relative z-10 max-w-2xl mx-auto flex flex-col items-center">
               {/* Eyebrow Badge */}
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest text-[#F8E7C8] bg-black/35 backdrop-blur-md border border-white/20 mb-6 shadow-sm">
-                <GraduationCap className="w-3.5 h-3.5 text-[#E6C687]" />
-                <span>Divine Aura Academy</span>
-              </div>
+              <Reveal variant="fade-up" duration={1000} delay={0}>
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest text-[#F8E7C8] bg-black/35 backdrop-blur-md border border-white/20 mb-6 shadow-sm">
+                  <GraduationCap className="w-3.5 h-3.5 text-[#E6C687]" />
+                  <span>Divine Aura Academy</span>
+                </div>
+              </Reveal>
 
               {/* Main Heading */}
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal leading-[1.2] text-white tracking-tight mb-4 drop-shadow-[0_2px_10px_rgba(0,0,0,0.4)]">
-                Ready to Start Your Journey?
-              </h2>
+              <Reveal variant="fade-up" duration={1100} delay={160}>
+                <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal leading-[1.2] text-white tracking-tight mb-4 drop-shadow-[0_2px_10px_rgba(0,0,0,0.4)]">
+                  Ready to Start Your Journey?
+                </h2>
+              </Reveal>
 
               {/* Description Subtitle */}
-              <p className="text-white/95 text-[15px] sm:text-base lg:text-lg leading-relaxed font-light mb-8 sm:mb-10 max-w-xl mx-auto drop-shadow-[0_1px_6px_rgba(0,0,0,0.4)]">
-                Enquire now and take the first step towards building hands-on skill and confidence in beauty and wellness.
-              </p>
+              <Reveal variant="fade-up" duration={1150} delay={320}>
+                <p className="text-white/95 text-[15px] sm:text-base lg:text-lg leading-relaxed font-light mb-8 sm:mb-10 max-w-xl mx-auto drop-shadow-[0_1px_6px_rgba(0,0,0,0.4)]">
+                  Enquire now and take the first step towards building hands-on skill and confidence in beauty and wellness.
+                </p>
+              </Reveal>
 
               {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
-                <Button
-                  to={`/contact?service=Academy%3A+${encodeURIComponent(ACADEMY_COURSE.title)}`}
-                  variant="light"
-                  size="lg"
-                  className="w-full sm:w-auto font-semibold !text-[#75561E] hover:!bg-[#FAF6F0] shadow-lg hover:shadow-xl transition-all duration-300"
-                >
-                  <span>Enquire Now</span>
-                  <ArrowRight className="w-4 h-4 ml-1 text-[#9E7A38]" />
-                </Button>
-                <Button
-                  to="/contact"
-                  variant="outlineWhite"
-                  size="lg"
-                  className="w-full sm:w-auto font-medium border-white/60 text-white hover:bg-white/15 backdrop-blur-sm shadow-md"
-                >
-                  <span>Visit Campus & Studio</span>
-                </Button>
-              </div>
+              <Reveal variant="fade-up" duration={950} delay={480}>
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
+                  <Button
+                    to={`/contact?service=Academy%3A+${encodeURIComponent(ACADEMY_COURSE.title)}`}
+                    variant="light"
+                    size="lg"
+                    className="w-full sm:w-auto font-semibold !text-[#75561E] hover:!bg-[#FAF6F0] shadow-lg hover:shadow-xl transition-all duration-300"
+                  >
+                    <span>Enquire Now</span>
+                    <ArrowRight className="w-4 h-4 ml-1 text-[#9E7A38]" />
+                  </Button>
+                  <Button
+                    to="/contact"
+                    variant="outlineWhite"
+                    size="lg"
+                    className="w-full sm:w-auto font-medium border-white/60 text-white hover:bg-white/15 backdrop-blur-sm shadow-md"
+                  >
+                    <span>Visit Campus & Studio</span>
+                  </Button>
+                </div>
+              </Reveal>
             </div>
           </div>
         </SectionContainer>

@@ -5,6 +5,12 @@ import { BRAND } from '../data/siteData';
 
 export default function Footer() {
 
+  const handleServiceClick = (serviceId) => {
+    if (window.location.pathname === '/services') {
+      window.dispatchEvent(new CustomEvent('open-service-card', { detail: { id: serviceId } }));
+    }
+  };
+
   return (
     <footer className="bg-[#FAF6F0] border-t border-[#EAE0D5] text-warmBrown-800 pt-16 pb-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -85,7 +91,8 @@ export default function Footer() {
                 <ul className="space-y-2 text-sm leading-relaxed text-warmBrown-600">
                   <li>
                     <Link
-                      to="/services"
+                      to="/services#hair-cut-hairstyling"
+                      onClick={() => handleServiceClick('hair-cut-hairstyling')}
                       className="block hover:text-[#9E7A38] transition-colors cursor-pointer"
                     >
                       Hair Cut & Hairstyling
@@ -93,7 +100,8 @@ export default function Footer() {
                   </li>
                   <li>
                     <Link
-                      to="/services"
+                      to="/services#bridal-makeup"
+                      onClick={() => handleServiceClick('bridal-makeup')}
                       className="block hover:text-[#9E7A38] transition-colors cursor-pointer"
                     >
                       Bridal Makeup
@@ -101,7 +109,8 @@ export default function Footer() {
                   </li>
                   <li>
                     <Link
-                      to="/services"
+                      to="/services#body-waxing"
+                      onClick={() => handleServiceClick('body-waxing')}
                       className="block hover:text-[#9E7A38] transition-colors cursor-pointer"
                     >
                       Body Waxing
@@ -109,7 +118,8 @@ export default function Footer() {
                   </li>
                   <li>
                     <Link
-                      to="/services"
+                      to="/services#facial-skin-care"
+                      onClick={() => handleServiceClick('facial-skin-care')}
                       className="block hover:text-[#9E7A38] transition-colors cursor-pointer"
                     >
                       Facial & Skin Care
@@ -117,7 +127,8 @@ export default function Footer() {
                   </li>
                   <li>
                     <Link
-                      to="/services"
+                      to="/services#de-tan-clean-up"
+                      onClick={() => handleServiceClick('de-tan-clean-up')}
                       className="block hover:text-[#9E7A38] transition-colors cursor-pointer"
                     >
                       De-Tan & Clean-Up

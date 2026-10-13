@@ -73,10 +73,10 @@ export const SERVICES_DATA = [
     description: "Personalized haircuts, blow-drys, and creative styling tailored to your look.",
     image: "/assets/service_hair_editorial.jpg",
     highlights: [
-      "Personalized cuts shaped around your features and style.",
-      "Professional blow-dry and finishing for a polished look.",
-      "Creative styling for everyday wear and special occasions.",
-      "Hair care focused on a smooth, healthy-looking finish."
+      "Everyday Styling",
+      "Fresh Haircuts",
+      "Hair Makeovers",
+      "Special Occasions"
     ]
   },
   {
@@ -87,10 +87,10 @@ export const SERVICES_DATA = [
     description: "Signature bridal makeup artistry and exquisite styling for your special celebration.",
     image: "/assets/service_bridal_editorial.jpg",
     highlights: [
-      "Personalized bridal looks designed around your features.",
-      "Elegant makeup styling for your special celebration.",
-      "Detailed finishing for a polished and camera-ready appearance.",
-      "Beauty preparation designed for a confident bridal experience."
+      "Pre-Wedding Events",
+      "Traditional Events",
+      "Special Celebrations",
+      "Engagement Ceremonies"
     ]
   },
   {
@@ -101,10 +101,10 @@ export const SERVICES_DATA = [
     description: "Hygienic and gentle waxing care delivered in a private, comfortable setting.",
     image: "/assets/service_waxing_editorial.jpg",
     highlights: [
-      "Gentle waxing care with attention to comfort and hygiene.",
-      "Professional treatment in a clean and private setting.",
-      "Careful application designed for a smooth skin finish.",
-      "After-care guidance to help maintain comfortable-looking skin."
+      "Full Body Grooming",
+      "Smooth Skin Care",
+      "Regular Grooming",
+      "Special Occasions"
     ]
   },
   {
@@ -115,10 +115,10 @@ export const SERVICES_DATA = [
     description: "Rejuvenating facials and nourishing treatments to refresh and revitalize your skin.",
     image: "/assets/service_skin_editorial.jpg",
     highlights: [
-      "Nourishing treatments designed to refresh tired-looking skin.",
-      "Personalized facial care based on individual skin needs.",
-      "Gentle techniques for a clean and refreshed appearance.",
-      "Treatments focused on a healthy-looking natural glow."
+      "Skin Refreshment",
+      "Deep Cleansing",
+      "Glow & Hydration",
+      "Regular Skin Care"
     ]
   },
   {
@@ -129,10 +129,10 @@ export const SERVICES_DATA = [
     description: "Gentle exfoliation and clarifying therapies designed for a clean, radiant complexion.",
     image: "/assets/service_detan_editorial.jpg",
     highlights: [
-      "Gentle exfoliation to refresh the appearance of the skin.",
-      "Clean-up care designed for a fresh and clear-looking complexion.",
-      "Clarifying treatment focused on removing surface impurities.",
-      "A refreshing finish for smoother, brighter-looking skin."
+      "Tan Removal",
+      "Dull Skin Care",
+      "Quick Skin Refresh",
+      "Pre-Event Grooming"
     ]
   }
 ];
@@ -150,10 +150,9 @@ export const ACADEMY_COURSE = {
     "Bleach",
     "Facial & Clean-up",
     "Skin Care",
-    "Mehndi Designing",
     "Home Care & Grooming",
     "Salon Hygiene & Safety",
-    "Client Handling & Personality Development"
+    "Client Handling & Personality"
   ]
 };
 
