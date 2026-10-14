@@ -1,8 +1,52 @@
+/**
+ * WhatsApp Configuration (Temporary Testing)
+ * Test WhatsApp Number: +91 8975860753
+ * To switch to the owner's final WhatsApp number, simply update this configuration object.
+ */
+export const WHATSAPP_CONFIG = {
+  number: "918975860753",
+  formatted: "+91 8975860753",
+  baseUrl: "https://wa.me/918975860753"
+};
+
+/**
+ * Builds an encoded WhatsApp URL with prefilled appointment enquiry details.
+ * Encodes all parameters using encodeURIComponent().
+ */
+export function createWhatsAppEnquiryUrl({ fullName = '', phone = '', email = '', service = '', date = '', time = '', message = '' }) {
+  const lines = [
+    `*New Appointment Enquiry — Divine Aura*`,
+    ``,
+    `*Name:* ${fullName.trim()}`,
+    `*Phone:* ${phone.trim()}`,
+  ];
+
+  if (email && email.trim()) {
+    lines.push(`*Email:* ${email.trim()}`);
+  }
+
+  lines.push(
+    `*Service / Course:* ${service.trim()}`,
+    `*Preferred Date:* ${date.trim()}`,
+    `*Preferred Time:* ${time.trim()}`
+  );
+
+  if (message && message.trim()) {
+    lines.push(`*Message:* ${message.trim()}`);
+  }
+
+  const messageText = lines.join('\n');
+  return `https://wa.me/${WHATSAPP_CONFIG.number}?text=${encodeURIComponent(messageText)}`;
+}
+
 export const BRAND = {
   name: "Divine Aura",
   tagline: "Where Beauty Meets Confidence",
   phone: "+91 7391035567",
   phoneRaw: "7391035567",
+  whatsappNumber: WHATSAPP_CONFIG.number,
+  whatsappFormatted: WHATSAPP_CONFIG.formatted,
+  whatsappUrl: WHATSAPP_CONFIG.baseUrl,
   email: "nirmalasartistry@gmail.com",
   address: "Nikhil Bunglow, Lane No. 2, Shivshambhonagar, Katraj-Kondhwa Road",
   city: "Pune, Maharashtra",
@@ -14,6 +58,7 @@ export const BRAND = {
   logo: "/assets/divine_aura_logo.jpg",
   logoEmbossed: "/assets/divine_aura_logo.jpg"
 };
+
 
 export const HIGHLIGHTS = [
   {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Phone, Instagram, MessageCircle, X } from 'lucide-react';
+import { WHATSAPP_CONFIG } from '../data/siteData';
 
 export default function FloatingContactButton() {
   const [isOpen, setIsOpen] = useState(false);
@@ -58,7 +59,7 @@ export default function FloatingContactButton() {
 
         {/* 2. WhatsApp */}
         <a
-          href="https://wa.me/917391035567"
+          href={WHATSAPP_CONFIG.baseUrl}
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => setIsOpen(false)}

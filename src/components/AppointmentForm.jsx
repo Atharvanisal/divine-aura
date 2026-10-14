@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { CheckCircle2, AlertCircle, Loader2, Sparkles } from 'lucide-react';
+import { CheckCircle2, AlertCircle, Sparkles } from 'lucide-react';
 import Reveal from './Reveal';
-import { BRAND } from '../data/siteData';
+import { BRAND, WHATSAPP_CONFIG, createWhatsAppEnquiryUrl } from '../data/siteData';
 
 // Backend-supported Divine Aura services
 const ALLOWED_SERVICES = [
@@ -60,9 +60,8 @@ export default function AppointmentForm({ initialService = '' }) {
   });
 
   const [errors, setErrors] = useState({});
-  const [status, setStatus] = useState('idle'); // 'idle' | 'loading' | 'success' | 'error'
+  const [status, setStatus] = useState('idle'); // 'idle' | 'success'
   const [formError, setFormError] = useState('');
-  const [serverError, setServerError] = useState('');
   const [successDetails, setSuccessDetails] = useState(null);
 
   const validate = () => {
@@ -140,70 +139,50 @@ export default function AppointmentForm({ initialService = '' }) {
     if (formError) {
       setFormError('');
     }
-    if (serverError) {
-      setServerError('');
-    }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (status === 'loading') return; // Prevent duplicate submissions
 
-    setServerError('');
     setFormError('');
 
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       setFormError('Please fill in all required fields.');
-      return; // DO NOT send API request
+      return;
     }
 
-    setStatus('loading');
+    // Build the WhatsApp enquiry URL with prefilled and encoded details
+    const waUrl = createWhatsAppEnquiryUrl({
+      fullName: formData.fullName,
+      phone: formData.phone,
+      email: formData.email,
+      service: formData.service,
+      date: formData.date,
+      time: formData.time,
+      message: formData.message,
+    });
 
+    setStatus('success');
+    setSuccessDetails({ ...formData, whatsappUrl: waUrl });
+    setFormData({
+      fullName: '',
+      phone: '',
+      email: '',
+      service: '',
+      date: '',
+      time: '',
+      message: '',
+    });
+    setErrors({});
+    setFormError('');
+
+    // Open WhatsApp chat directly in a new tab synchronously on click
     try {
-      const response = await fetch('/api/appointment', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          fullName: formData.fullName.trim(),
-          phone: formData.phone.trim(),
-          email: formData.email.trim(),
-          service: formData.service,
-          date: formData.date,
-          time: formData.time,
-          message: formData.message.trim() || 'Appointment / enquiry request submitted through Divine Aura website.',
-        }),
-      });
-
-      const data = await response.json().catch(() => null);
-
-      if (response.ok && data?.success) {
-        setStatus('success');
-        setSuccessDetails({ ...formData });
-        setFormData({
-          fullName: '',
-          phone: '',
-          email: '',
-          service: '',
-          date: '',
-          time: '',
-          message: '',
-        });
-        setErrors({});
-        setFormError('');
-        setServerError('');
-      } else {
-        setStatus('error');
-        // Display actual backend error message if available
-        const errorMsg = data?.message || (response.statusText ? `Request failed (${response.status}): ${response.statusText}` : 'We could not submit your enquiry right now. Please try again.');
-        setServerError(errorMsg);
-      }
+      window.open(waUrl, '_blank', 'noopener,noreferrer');
     } catch {
-      setStatus('error');
-      setServerError('We could not submit your enquiry right now. Please try again.');
+      // Handled gracefully in UI with explicit button
     }
   };
 
@@ -211,22 +190,56 @@ export default function AppointmentForm({ initialService = '' }) {
     setStatus('idle');
     setErrors({});
     setFormError('');
-    setServerError('');
     setSuccessDetails(null);
   };
 
   if (status === 'success' && successDetails) {
     return (
-      <div className="bg-white rounded-3xl p-8 sm:p-10 border border-[#EAE0D5] shadow-lg text-center animate-fadeIn">
-        <div className="w-16 h-16 rounded-full bg-[#FAF3E8] border border-[#E5D7BE] flex items-center justify-center mx-auto text-[#9E7A38] mb-6">
+      <div className="bg-white rounded-3xl p-6 sm:p-10 border border-[#EAE0D5] shadow-lg text-center animate-fadeIn">
+        <div className="w-16 h-16 rounded-full bg-[#FAF3E8] border border-[#E5D7BE] flex items-center justify-center mx-auto text-[#9E7A38] mb-5">
           <CheckCircle2 className="w-9 h-9" />
         </div>
         <h3 className="font-serif text-2xl sm:text-3xl text-espresso mb-2">
-          Request Received With Care
+          Appointment Enquiry Prepared
         </h3>
         <p className="text-sm text-warmBrown-600 max-w-md mx-auto mb-6">
-          Thank you, <span className="font-semibold text-espresso">{successDetails.fullName}</span>. Your enquiry for <span className="font-semibold text-espresso">{successDetails.service}</span> has been noted. Our team will contact you shortly on {successDetails.phone}.
+          Thank you, <span className="font-semibold text-espresso">{successDetails.fullName}</span>. Your enquiry details for <span className="font-semibold text-espresso">{successDetails.service}</span> are ready to be sent on WhatsApp.
         </p>
+
+        {/* WhatsApp Action & Graceful Fallback Card */}
+        <div className="bg-[#FAF3E8]/80 border border-[#E5D7BE] rounded-2xl p-5 sm:p-6 max-w-md mx-auto text-left mb-6 shadow-sm">
+          <div className="flex items-start gap-3.5">
+            <div className="w-10 h-10 rounded-full bg-[#25D366] text-white flex items-center justify-center shrink-0 shadow-sm mt-0.5">
+              <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
+              </svg>
+            </div>
+            <div className="flex-1">
+              <h4 className="font-semibold text-sm text-espresso">
+                WhatsApp Chat Ready
+              </h4>
+              <p className="text-xs text-warmBrown-700 mt-1 leading-relaxed">
+                Your appointment details have been prepared. <strong className="text-espresso font-semibold">Please press the "Send" button in WhatsApp</strong> to send your booking request directly to our team at <span className="font-medium text-espresso">{WHATSAPP_CONFIG.formatted}</span>.
+              </p>
+              <div className="mt-3.5">
+                <a
+                  href={successDetails.whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium bg-[#25D366] hover:bg-[#20bd5a] text-white transition-all shadow hover:shadow-md active:scale-95"
+                >
+                  <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
+                  </svg>
+                  <span>Open WhatsApp Chat</span>
+                </a>
+              </div>
+              <p className="text-[11px] text-warmBrown-500 mt-2">
+                If WhatsApp did not open automatically, please click the button above. (Please remember to press <strong>Send</strong> in WhatsApp to deliver your message).
+              </p>
+            </div>
+          </div>
+        </div>
 
         <div className="bg-[#FAF6F0] rounded-2xl p-4 max-w-md mx-auto text-left text-xs sm:text-sm text-warmBrown-700 space-y-1.5 border border-[#EAE0D5]/70 mb-8">
           <p><span className="font-medium text-espresso">Service / Enquiry:</span> {successDetails.service}</p>
@@ -244,6 +257,7 @@ export default function AppointmentForm({ initialService = '' }) {
       </div>
     );
   }
+
 
   return (
     <form
@@ -274,13 +288,6 @@ export default function AppointmentForm({ initialService = '' }) {
         </div>
       )}
 
-      {/* Top-Level Server Error Banner */}
-      {serverError && (
-        <div className="mb-6 p-4 rounded-2xl bg-red-50 border border-red-200 text-red-700 text-xs sm:text-sm flex items-center gap-2 animate-fadeIn">
-          <AlertCircle className="w-4 h-4 shrink-0 text-red-500" />
-          <span>{serverError}</span>
-        </div>
-      )}
 
       <div className="space-y-4">
         {/* Full Name */}
@@ -473,17 +480,9 @@ export default function AppointmentForm({ initialService = '' }) {
         <div className="pt-2">
           <button
             type="submit"
-            disabled={status === 'loading'}
-            className="w-full py-3.5 px-6 rounded-full font-medium text-sm text-white bg-[#9E7A38] hover:bg-[#856529] shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2 active:scale-[0.98] disabled:opacity-70"
+            className="w-full py-3.5 px-6 rounded-full font-medium text-sm text-white bg-[#9E7A38] hover:bg-[#856529] shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2 active:scale-[0.98]"
           >
-            {status === 'loading' ? (
-              <>
-                <Loader2 className="w-4 h-4 animate-spin" />
-                <span>Processing Request...</span>
-              </>
-            ) : (
-              <span>Submit Appointment Request</span>
-            )}
+            <span>Submit Appointment Request</span>
           </button>
         </div>
 

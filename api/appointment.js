@@ -420,6 +420,9 @@ export default async function handler(req, res) {
       console.error('[API DIAGNOSTIC] Resend API Error Name:', error.name || 'ResendDeliveryError');
       console.error('[API DIAGNOSTIC] Resend API Error Message:', error.message);
       console.error('[API DIAGNOSTIC] Resend API Error Code/Status:', error.statusCode || error.status);
+      if (error.statusCode === 403 && fromEmail === 'onboarding@resend.dev') {
+        console.error('[API DIAGNOSTIC] TIP: When using onboarding@resend.dev, Resend only permits sending to the account owner\'s registered email address. To send to other addresses (like nirmalasartistry@gmail.com), verify a domain at resend.com/domains.');
+      }
       return res.status(500).json({
         success: false,
         message: 'We could not submit your enquiry right now. Please try again.'
