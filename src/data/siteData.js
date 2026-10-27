@@ -1,12 +1,12 @@
 /**
- * WhatsApp Configuration (Temporary Testing)
- * Test WhatsApp Number: +91 8975860753
- * To switch to the owner's final WhatsApp number, simply update this configuration object.
+ * WhatsApp Configuration
+ * Owner WhatsApp Number: +91 7391035567
+ * WhatsApp URL: https://wa.me/917391035567
  */
 export const WHATSAPP_CONFIG = {
-  number: "918975860753",
-  formatted: "+91 8975860753",
-  baseUrl: "https://wa.me/918975860753"
+  number: "917391035567",
+  formatted: "+91 7391035567",
+  baseUrl: "https://wa.me/917391035567"
 };
 
 /**
