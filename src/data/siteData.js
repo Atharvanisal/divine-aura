@@ -47,7 +47,7 @@ export const BRAND = {
   whatsappNumber: WHATSAPP_CONFIG.number,
   whatsappFormatted: WHATSAPP_CONFIG.formatted,
   whatsappUrl: WHATSAPP_CONFIG.baseUrl,
-  email: "nirmalasartistry@gmail.com",
+  email: "divineaura145@gmail.com",
   address: "Nikhil Bunglow, Lane No. 2, Shivshambhonagar, Katraj-Kondhwa Road",
   city: "Pune, Maharashtra",
   timings: "Monday – Sunday | 10:00 AM – 08:00 PM",
